@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Form } from 'semantic-ui-react';
+import { Button, Form } from 'react-bootstrap';
 
 const formInputstyle = {
     color: 'white',
@@ -8,48 +8,43 @@ const formInputstyle = {
     letterspacing: '1px'
 };
 
-const LoginForm = () => {
+const [user, setUser] = useStatere
+
+const LoginForm = ({onChange, onLoginSubmit}) => {
     return (
         <div id='backgroundimg'>
             <div className='ui grid'>
                 <div className='five wide column' />
                 <div className='six wide column formBackground'>
                     <h1>Login Page</h1>
-                    <Form>
-                        <Form.Field>
-                            <label htmlFor='username' style={formInputstyle}> username
-                                <input
-                                    type='text'
-                                    name='username'
-                                    placeholder='username'
-                                />
-                            </label>
-                        </Form.Field>
-                        <Form.Field>
-                            <label htmlFor='email' style={formInputstyle}>email
-                                <input
-                                    type='email'
-                                    name='email'
-                                    id='email'
-                                    placeholder='example@gmail.com'
-                                />
-                            </label>
-                        </Form.Field>
-                        <Form.Field>
-                            <label htmlFor='password' style={formInputstyle}>Password
-                               <input
-                                    type='password'
-                                    name='password'
-                                    placeholder='Password'
-                                />
-                            </label>
-                        </Form.Field>
-                        <Button primary>Signup</Button>
+                    <Form onSubmit={onLoginSubmit}>
+                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Label>Email address</Form.Label>
+                            <Form.Control
+                                name='email'
+                                type="email"
+                                placeholder="Enter email"
+                                onChange={onChange}
+                            />
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="formBasicPassword">
+                            <Form.Label>Password</Form.Label>
+                            <Form.Control
+                                name='password'
+                                type="password"
+                                placeholder="Password"
+                                onChange={onChange}
+                            />
+                        </Form.Group>
+                        <Button variant="primary" type="submit">
+                            Login
+                      </Button >
                         <p style={formInputstyle}>
                             Do not have an Account?
                              <Link className='auth' to='/auth/signup'>Signup</Link>
                         </p>
                     </Form>
+                    
                 </div>
             </div>
         </div>

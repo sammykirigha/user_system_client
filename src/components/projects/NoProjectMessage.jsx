@@ -1,5 +1,5 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const NoProjectMessage = () => {
     return (
@@ -19,7 +19,7 @@ const NoProjectMessage = () => {
                 </p>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default NoProjectMessage
+export default NoProjectMessage;

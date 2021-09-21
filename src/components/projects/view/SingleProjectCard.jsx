@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const SingleProjectCard = () => {
     return (
@@ -21,7 +21,7 @@ const SingleProjectCard = () => {
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default SingleProjectCard
+export default SingleProjectCard;

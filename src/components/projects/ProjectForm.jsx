@@ -1,12 +1,12 @@
-import moment from 'moment'
-import React, { useState } from 'react'
+import moment from 'moment';
+import React, { useState } from 'react';
 import ReactDatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css'
-import { Button, Form } from 'semantic-ui-react'
+import 'react-datepicker/dist/react-datepicker.css';
+import { Button, Form } from 'semantic-ui-react';
 
 const ProjectForm = (props) => {
-    const [selectedDate, setSelectedDate] = useState(null)
-    const minDate = moment()
+    const [selectedDate, setSelectedDate] = useState(null);
+    const minDate = moment();
     return (
         <div className='ui grid'>
             <div className='ten twelve wide centered column'></div>
@@ -48,7 +48,7 @@ const ProjectForm = (props) => {
                 <Button primary> {props.buttonText}</Button>
             </Form>
         </div>
-    )
-}
+    );
+};
 
-export default ProjectForm
+export default ProjectForm;

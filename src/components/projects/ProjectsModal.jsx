@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const ProjectsModal = (props) => {
     // onClose = () => {
@@ -12,7 +12,7 @@ const ProjectsModal = (props) => {
                 <div className=''> {props.children} sammy kirigha</div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default ProjectsModal
+export default ProjectsModal;

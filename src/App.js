@@ -1,5 +1,6 @@
 import { Route, Switch } from 'react-router-dom';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Landing from './components/home/Landing';
 import LoginForm from './components/login/LoginForm';
 import ProjectForm from './components/projects/ProjectForm';
@@ -13,7 +14,7 @@ function App() {
   return (
     <div className="ui">
       <Switch>
-        <Route path='/' exact component={SearchComponent} />
+        <Route path='/' exact component={Landing} />
         <Route path='/auth/login' exact component={LoginForm} />
         <Route path='/auth/signup' exact component={SignupForm} />
      </Switch>
