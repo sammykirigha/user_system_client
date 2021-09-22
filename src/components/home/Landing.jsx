@@ -1,7 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import {connect} from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { logout } from '../../redux/actions/login';
+import { isTokenExpired } from '../helpers/Helpers';
 
 const Landing = () => {
+ 
+    const dispatch = useDispatch();
+    const state = useSelector(state => state.log);
+
+    const isAuthenticated = () => {
+        if (!!state?.user?.token && !isTokenExpired(state?.user?.token)) {
+            return true;
+        }
+        return false;
+    };
+    console.log('checking for authentication', isAuthenticated());
+
+
+    useEffect(() => {
+      isAuthenticated();
+    },[state?.user?.token]);
+    
     return (
         <header id='backgroundimg'>
             <div className='ui inverted menu'>
@@ -9,15 +30,30 @@ const Landing = () => {
                     User System
                  </li>
                 <div className='right menu'>
-                    <li className='item'>
-                        Login
-                    </li>
-                    <li className='item'>
-                        Dashbord
-                     </li>
-                    <li className='item'>
-                        Logout
-                    </li>
+                    {!!isAuthenticated ? 
+                        <li className='item'>
+                            <Link to='/auth/login'>
+                                <i className='sign in icon' />
+                            Login
+                        </Link>
+                        </li>
+                        :
+                        <li className='item'>
+                            <Link to='/project/create'>
+                                <i className='tasks icon' /> Dashboard
+                        </Link>
+                        </li> 
+                    };
+                    
+                    {!isAuthenticated ? 
+                        <li className='item'>
+                            <a href='#logout' className='logout' onClick={() => dispatch(logout())}>
+                                Logout <i className='sign out icon' />
+                            </a>
+                        </li>
+                        : null
+                     }
+                   
                 </div>
             </div>
             <div className='text-box'>
@@ -39,4 +75,4 @@ const Landing = () => {
     );
 };
 
-export default Landing;
+export default connect(null, {logout: logout})(Landing);

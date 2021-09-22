@@ -2,7 +2,7 @@ import moment from 'moment'
 import React, { Component } from 'react'
 import ProjectForm from '../ProjectForm'
 
-export class EditEventContainer extends Component {
+export class EditProjectContainer extends Component {
     state = {
         data: {
             id: '',
@@ -29,4 +29,4 @@ export class EditEventContainer extends Component {
     }
 }
 
-export default EditEventContainer
+export default EditProjectContainer

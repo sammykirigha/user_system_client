@@ -16,24 +16,24 @@ const SignupForm = (props) => {
         email: '',
         password: '',
         conPassword: ''
-    })
-    const { registerMessage } = useSelector(state => state.reg)
+    });
+    const { registerMessage } = useSelector(state => state.reg);
     console.log(registerMessage);
-    const reg = useSelector(state => state.reg)
-    const dispatch = useDispatch()
-    const history = useHistory()
+    const reg = useSelector(state => state.reg);
+    const dispatch = useDispatch();
+    const history = useHistory();
 
     const onChange = e => {
-        setUser(prev => ({ ...prev, [e.target.name]: e.target.value }))
+        setUser(prev => ({ ...prev, [e.target.name]: e.target.value }));
     };
     
     const handleSubmit = e => {
-        e.preventDefault()
-        console.log(user);
-        dispatch(userRegister(user))
-        history.push('/auth/login')
+        e.preventDefault();
+        dispatch(userRegister(user));
+        console.log('registering user',user);
+        history.push('/auth/login');
         console.log('state<<<>>>>',reg);
-    }
+    };
     return (
         <div id='backgroundimg'>
             <div className='ui grid'>

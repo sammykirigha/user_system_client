@@ -30,46 +30,9 @@ export const validate = (data) => {
 };
 
 const SignupContainer = () => {
-    
-    const history = useHistory();
-
-    const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [conPassword, setConPassword] = useState('');
-    const [loading, setLoading] = useState(false);
-    const [errors, setErrors] = useState({});
-
-    
-
-    const data = {
-        username,
-        email,
-        password,
-        conPassword
-    };
-
-    const onSignupSubmit = e => {
-        e.preventDefault();
-        console.log(user);
-        // alert('submit')
-        // const errors = validate(data);
-        // setErrors(errors);
-        // if (Object.keys(errors).length === 0) {
-        //     setLoading(true);
-            
-        // }
-    };
-    
-    const handleSubmit = e => {
-        e.preventDefault()
-    }
-
     return (
             <div>
                 <SignupForm
-                    onChange={onChange}
-                    handleSubmit={handleSubmit}
                 />
             </div>
         );

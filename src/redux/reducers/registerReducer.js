@@ -2,13 +2,12 @@ import { REGISTER_USER, REGISTER_USER_FAIL, REGISTER_USER_SUCCESS } from '../typ
 
 export const registerReducer = (state = { user: {} }, action) => {
     console.log('response');
-    let response = action.response;
     switch (action.type) {
         case REGISTER_USER:
             return {
                 ...state,
                 loading: true
-            }
+            };
         case REGISTER_USER_SUCCESS:
             return {
                 ...state,
@@ -19,9 +18,9 @@ export const registerReducer = (state = { user: {} }, action) => {
             return { 
                 ...state,
                 loading: false,
-                error: response
+                error: action.error
              };
         default:
             return state;
     }
-}
+};

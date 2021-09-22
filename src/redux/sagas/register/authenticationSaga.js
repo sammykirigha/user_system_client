@@ -1,7 +1,7 @@
 import { put, call } from 'redux-saga/effects';
+import { registerUserService } from '../../../services/authenticationService';
+import { userRegisterFail, userRegisterSuccess } from '../../actions/auth';
 
-import { registerUserService } from '../../services/authenticationService.jsx';
-import { userRegisterFail, userRegisterSuccess } from '../actions/auth.js';
 
 
 export function* registerSaga(action) {

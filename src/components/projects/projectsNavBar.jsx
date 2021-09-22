@@ -1,15 +1,15 @@
 import React from 'react';
-import { Link, useRouteMatch } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 
-const projectsNavBar = () => {
-    const pathName = useRouteMatch();
-    console.log('path name<<<<<<<>>>>>:',pathName);
+const ProjectsNavBar = ({ username, logout }) => {
     const sticky = {
         position: 'fixed',
         zIndex: '9',
         width: '100%',
         paddingTop: '1%'
     };
+    const dispatch = useDispatch()
     return (
         <div className='ui inverted menu' style={sticky}>
             <li className='item'>
@@ -29,10 +29,10 @@ const projectsNavBar = () => {
             </li>
             <div className="right menu">
                 <li className="item">
-                    <i className='user icon' /> sammy
+                    <i className='user icon' /> {username}
                 </li>
                 <li className="item">
-                    <Link to='/' className='logout'>
+                    <Link to='/' className='logout' onClick={() => dispatch(logout())}>
                         Logout <i className='sign out icon' />
                     </Link>
                 </li>
@@ -41,4 +41,4 @@ const projectsNavBar = () => {
     );
 };
 
-export default projectsNavBar;
+export default ProjectsNavBar;

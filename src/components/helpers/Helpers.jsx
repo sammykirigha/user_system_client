@@ -4,7 +4,7 @@ import Validator from 'validator';
 export const isTokenExpired = token => {
     const currentTime = new Date() / 1000;
     if (jwt_decode(token).exp < currentTime) {
-        localStorage.removeItem('theJWT');
+        localStorage.removeItem('token');
         return true;
     }
     return false;
