@@ -1,5 +1,5 @@
 import { takeLatest } from 'redux-saga/effects';
-import { REGISTER_USER } from '../../types/types';
+import { REGISTER_USER } from '../../redux/types/types';
 import { registerSaga } from './authenticationSaga';
 
 

@@ -13,6 +13,7 @@ import ProjectLayout from './components/projects/ProjectLayout';
 import CreateProjectContainer from './components/projects/create/CreateProjectContainer.jsx';
 import EditProjectContainer from './components/projects/edit/EditProjectContainer.jsx';
 import ProjectList from './components/projects/view/ProjectList';
+import NoProjectMessage from './components/projects/NoProjectMessage';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <ProjectLayout path='/projects/create' exact component={CreateProjectContainer} page='create' />
         <ProjectLayout path='/projects/:id/edit' exact component={EditProjectContainer} page='edit' />
         <ProjectLayout path='/projects/' exact component={ProjectList} page='allProjects' />
+        <ProjectLayout path='/landing' exact component={NoProjectMessage} page='landing' />
      </Switch>
     </div>
   );

@@ -1,19 +1,28 @@
 import React from 'react';
 
-const ConfirmDelete = (props) => {
+const ConfirmDelete = ({setOpenModal}) => {
     return (
-        <div className='ui grid confirm-modal'>
-            <div className="ten wide column">
-                <p>
-                    are you sure you want to delete this project
-                </p>
-            </div>
-            <div className="four wide column">
-                <div className="ui buttons">
-                    <button className='ui primary button'>Cancel</button>
-                    <div className="or" />
-                    <button className='ui red button'>Delete</button>
+
+        <div className="modalBackground">
+            <div className="modalContainer">
+                <div className="titleCloseBtn">
+                  <button className='close' onClick={() => { setOpenModal(false) }} >&times;</button>
                 </div>
+                <div className="ten wide column">
+                    <div className="body">
+                        <p >
+                            <strong>Are you sure you want to delete this project?</strong>
+                       </p>
+                </div>
+               
+            </div>
+                <div className="four wide column" style={{ marginLeft: 'auto', marginTop: '2rem' }}>
+                    <div className="ui buttons" >
+                     <button className='ui primary button' onClick={() => {setOpenModal(false)}}>Cancel</button>
+                     <div className="or" />
+                     <button className='ui red button'>Delete</button>
+                 </div>
+            </div>
             </div>
         </div>
     );

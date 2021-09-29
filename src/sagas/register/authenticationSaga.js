@@ -1,6 +1,6 @@
 import { put, call } from 'redux-saga/effects';
-import { registerUserService } from '../../../services/authenticationService';
-import { userRegisterFail, userRegisterSuccess } from '../../actions/auth';
+import { registerUserService } from '../../services/authenticationService';
+import { userRegisterFail, userRegisterSuccess } from '../../redux/actions/auth';
 
 
 

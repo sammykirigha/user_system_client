@@ -4,7 +4,14 @@ import { Button, Form } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { userLogging } from '../../redux/actions/login';
-import { isTokenExpired } from '../helpers/Helpers';
+import Validator from 'validator';
+
+export const validate = (data) => {
+    const errors = {};
+    if (Validator.isEmpty(data.email)) errors.email = 'email can not be empty';
+    if (Validator.isEmpty(data.password)) errors.password = 'password can nott be empty';
+    return errors;
+};
 
 const formInputstyle = {
     color: 'white',
@@ -12,40 +19,40 @@ const formInputstyle = {
     letterspacing: '1px'
 };
 
-
 const LoginForm = (props) => {
+    const history = useHistory();
+    const dispatch = useDispatch();
+
+    const state = useSelector(state => state.log);
+    const [errors, setErrors] = useState({});
+    const [loading, setLoading] = useState(false);
     const [user, setUser] = useState({
         email: '',
         password: ''
     });
 
-    const history = useHistory();
-  
-    const state = useSelector(state => state.log);
-
-    // const isAuthenticated = () => {
-    //     if (!!state.user.token && !isTokenExpired(state.user.token)) {
-    //         return true
-    //     }
-    //     return false
-    // }
-    // console.log('checking for authentication', isAuthenticated());
-    console.log('<<<<<<<<login user>>>>>>',state.user.token);
-    const dispatch = useDispatch();
-
     const onChange = e => {
         setUser(prev => ({ ...prev, [e.target.name]: e.target.value }));
     };
 
+
     const onLoginSubmit = e => {
         e.preventDefault();
+        setLoading(true);
         dispatch(userLogging(user));
-
+        console.log('the state from loginform', state);
+        // const errors = validate(user);
+        // setErrors({ errors });
+        // console.log('login errors', errors);
+        // if (Object.keys(errors).length === 0) {
+        //     setLoading(true);
+        //     dispatch(userLogging(user));
+        // }
     };
 
     useEffect(() => {
-        if(state?.user?.id) history.push('/projects');
-    }, [state.user]);
+        if(state?.user?.id) history.push('/landing');
+    }, [state?.user?.id]);
 
     return (
         <div id='backgroundimg'>
@@ -62,6 +69,7 @@ const LoginForm = (props) => {
                                 placeholder="Enter email"
                                 onChange={onChange}
                             />
+                            {errors.email && <InLineError message={errors.email} />}
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicPassword">
                             <Form.Label>Password</Form.Label>
@@ -71,6 +79,7 @@ const LoginForm = (props) => {
                                 placeholder="Password"
                                 onChange={onChange}
                             />
+                            {errors.password && <InLineError message={errors.password} />}
                         </Form.Group>
                         <Button variant="primary" type="submit">
                             Login

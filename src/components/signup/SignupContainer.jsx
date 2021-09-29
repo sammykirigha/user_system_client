@@ -2,9 +2,6 @@ import React, { Component, useState } from 'react';
 import Validator from 'validator';
 import PasswordValidator from 'password-validator';
 import SignupForm from './SignupForm';
-import {connect} from 'react-redux';
-import { registerUserAction } from '../../redux/actions/auth';
-import { useHistory } from 'react-router';
 
 
 const validatepassword = new PasswordValidator();

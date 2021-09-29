@@ -1,6 +1,6 @@
 import { put, call } from 'redux-saga/effects';
-import { loginUserService } from '../../../services/authenticationService';
-import { userLoginFail, userLoginSuccess } from '../../actions/login';
+import { loginUserService } from '../../services/authenticationService';
+import { userLoginFail, userLoginSuccess } from '../../redux/actions/login';
 
 
 export function* loginSaga(action) {

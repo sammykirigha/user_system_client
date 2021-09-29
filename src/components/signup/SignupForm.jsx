@@ -1,8 +1,33 @@
 import React, { useState } from 'react';
+import Validator from 'validator';
+import PasswordValidator from 'password-validator';
 import {Button, Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import { userRegister } from '../../redux/actions/auth';
+import InLineError from '../messages/InLineError';
+
+const validatepassword = new PasswordValidator();
+validatepassword.is().min(6)
+    .is().max(20)
+    .has().uppercase()
+    .has().lowercase()
+    .has().digits()
+    .has().not().spaces();
+
+export const validate = (data) => {
+    const errors = {};
+    if (data.username.length < 3) errors.username = 'username must be at least 3 characters';
+    if (Validator.isNumeric(data.username)) errors.username = 'username can\'t be numbers';
+    if (!Validator.isAlphanumeric(data.username)) errors.username =
+        'username can only contain letters and numbers';
+    if (!Validator.isEmail(data.email) || Validator.isEmpty(data.email)) errors.email = 'please provide a valid email';
+    if (Validator.isEmpty(data.password)) errors.password = 'Password can\'t be blank';
+    if (!validatepassword.validate(data.password)) errors.password =
+        'password should not have spaces, must be more than 6 characters contain numbers and both lower and uppercase letters';
+    if (!Validator.equals(data.password, data.conPassword)) errors.password = 'passwords do not match';
+    return errors;
+};
 
 const formInputstyle = {
     color: 'white',
@@ -11,14 +36,16 @@ const formInputstyle = {
 };
 
 const SignupForm = (props) => {
+
     const [user, setUser] = useState({
         username: '',
         email: '',
         password: '',
         conPassword: ''
     });
-    const { registerMessage } = useSelector(state => state.reg);
-    console.log(registerMessage);
+    const [errors, setErrors] = useState({});
+    const [loading, setLoading] = useState(false);
+    
     const reg = useSelector(state => state.reg);
     const dispatch = useDispatch();
     const history = useHistory();
@@ -29,10 +56,23 @@ const SignupForm = (props) => {
     
     const handleSubmit = e => {
         e.preventDefault();
-        dispatch(userRegister(user));
-        console.log('registering user',user);
-        history.push('/auth/login');
-        console.log('state<<<>>>>',reg);
+        const errors = validate(user);
+        setErrors({errors});
+        console.log('the user errors', errors);
+        if (Object.keys(errors).length === 0) {
+            try {
+                setLoading(true);
+                dispatch(userRegister(user));
+                history.push('/auth/login');
+            } catch (err) {
+                if (err.request.status === 500) {
+                    setErrors({ message: 'Service is unavailable, please try again later' });
+                    setLoading(false);
+                } else {
+                    setErrors({ errors: err.response.data});
+                }
+            }
+        }
     };
     return (
         <div id='backgroundimg'>
@@ -45,33 +85,40 @@ const SignupForm = (props) => {
                             <Form.Label>Username</Form.Label>
                             <Form.Control
                                 name='username'
+                                value={user.username}
                                 type="text"
                                 placeholder="Enter username"
                                 onChange={onChange}
                             />
+                            {errors.username && <InLineError message={errors.username} />}
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label>Email address</Form.Label>
                             <Form.Control
                                 name='email'
+                                value={user.email}
                                 type="email"
                                 placeholder="Enter email"
                                 onChange={onChange}
                             />
+                            {errors.email && <InLineError message={errors.email} />}
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicPassword">
                             <Form.Label>Password</Form.Label>
                             <Form.Control
                                 name='password'
+                                value={user.password}
                                 type="password"
                                 placeholder="Password"
                                 onChange={onChange}
                             />
+                            {errors.password && <InLineError message={errors.password} />}
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicCnPassword">
                             <Form.Label>Confirm Password</Form.Label>
                             <Form.Control
                                 name='conPassword'
+                                value={user.conPassword}
                                 type="password"
                                 placeholder="Password" 
                                 onChange={onChange}

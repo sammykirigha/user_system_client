@@ -22,12 +22,16 @@ export const userLoginFail = (error) => {
 };
 
 export const userLogout = () => {
-    return ({
+    return {
         type: LOGOUT
-    });
+    };
 };
 
-export const logout = () => (dispatch) => {
-    localStorage.removeItem('token');
-    dispatch(userLogout());
+export const logout = () => async (dispatch) => {
+    try {
+        localStorage.removeItem('token');
+        dispatch(userLogout());   
+    } catch (error) {
+        console.log(error);
+    }
 };

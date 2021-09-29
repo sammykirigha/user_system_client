@@ -4,9 +4,11 @@ import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 
 import createSagaMiddleware from 'redux-saga';
-import rootSaga from './sagas/index';
+import rootSaga from '../sagas/index';
 import { registerReducer } from './reducers/registerReducer';
 import { loginReducer } from './reducers/loginReducer';
+import { createProjectReducer, fetchProjectsReducer, updateProjectReducer } from './reducers/projectReducer';
+
 
 export default function configureStore() {
     const sagaMiddleware = createSagaMiddleware();
@@ -14,7 +16,10 @@ export default function configureStore() {
     const store = createStore(
         combineReducers({
             reg: registerReducer,
-            log: loginReducer
+            log: loginReducer,
+            create: createProjectReducer,
+            projects: fetchProjectsReducer,
+            update: updateProjectReducer
        }),
         composeWithDevTools(applyMiddleware(sagaMiddleware, thunk, logger))
     );

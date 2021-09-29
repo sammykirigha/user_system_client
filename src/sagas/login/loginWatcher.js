@@ -1,5 +1,5 @@
 import { takeLatest } from 'redux-saga/effects';
-import { LOGIN } from '../../types/types';
+import { LOGIN } from '../../redux/types/types';
 import { loginSaga } from './loginSaga';
 
 

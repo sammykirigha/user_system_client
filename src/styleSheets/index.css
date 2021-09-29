@@ -3,14 +3,18 @@ html {
 }
 
 body{
-    margin: 0;
-    padding: 0;
-    font-family: sans-serif;
-    background-color: #f1f1f1;
+  max-width: 1400px;
+  max-height: 1500px;
+  background-color: rgb(99, 95, 95);;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+
 }
 
 /* landing page style */
 #backgroundimg{
+  /* background: #eeeeee; */
   background-color: rgb(99, 95, 95);
   background-size: cover;
   height: 100vh;
@@ -41,6 +45,7 @@ body{
   left: 0;
   right: 0;
   top: 0;
+  width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.3);
   display: flex;
@@ -70,3 +75,84 @@ body{
   text-align: center;
   font-size: 18px;
 }
+
+.modalBackground {
+position: absolute;
+bottom: 0;
+left: 0;
+right: 0;
+top: 0;
+height: 100%;
+opacity: .9;
+background-color: rgba(200, 200, 200);
+position: fixed;
+  display: flex;
+  justify-content: center;
+  margin-top: 3.05rem;
+  /* align-items: flex-start; */
+  z-index: 20;
+}
+
+.modalContainer {
+  width: 400px;
+  height: 200px;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
+}
+
+.modalContainer .title {
+  display: inline-block;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.titleCloseBtn button {
+  position: absolute;
+top: 20px;
+right: 20px;
+transform: translateY(-50%);
+background-color: transparent;
+
+  background-color: transparent;
+  border: none;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.modalContainer .body {
+  flex: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.7rem;
+  text-align: center;
+}
+
+.modalContainer .footer{
+  flex: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalContainer .footer button {
+  width:  150px;
+  height: 45px;
+  margin: 10px;
+  border: none;
+  background-color: cornflowerblue;
+  color: white;
+  border-radius: 8px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+#cancelBtn {
+  background-color: crimson;
+}
+
+

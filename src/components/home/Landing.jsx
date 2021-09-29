@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import {connect} from 'react-redux'
+import {connect} from 'react-redux';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logout } from '../../redux/actions/login';
@@ -38,19 +38,22 @@ const Landing = () => {
                         </Link>
                         </li>
                         :
-                        <li className='item'>
-                            <Link to='/project/create'>
-                                <i className='tasks icon' /> Dashboard
-                        </Link>
-                        </li> 
+                        null
                     };
                     
                     {!isAuthenticated ? 
+                        <>
                         <li className='item'>
-                            <a href='#logout' className='logout' onClick={() => dispatch(logout())}>
-                                Logout <i className='sign out icon' />
-                            </a>
+                            <Link to='/project/create'>
+                                <i className='tasks icon' /> Dashboard
+                            </Link>
                         </li>
+                        <li className='item'>
+                            <button className='logout' onClick={() => dispatch(logout())}>
+                                Logout <i className='sign out icon' />
+                            </button>
+                        </li>
+                            </>
                         : null
                      }
                    

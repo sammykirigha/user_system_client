@@ -1,15 +1,11 @@
 import React from 'react';
 
-const ProjectsModal = (props) => {
-    // onClose = () => {
-    //     props.onClose
-    // }
-        
+const ProjectsModal = ({openModal}) => {
     return (
         <div className='custom-modal-wrapper'>
             <div className="custom-modal">
-                <button className='close' >&times;</button>
-                <div className=''> {props.children} sammy kirigha</div>
+                <button className='close' onClick={() => {openModal(false)}} >&times;</button>
+                <div className=''>{props.children}</div>
             </div>
         </div>
     );
