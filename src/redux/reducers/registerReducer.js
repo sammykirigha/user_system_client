@@ -1,7 +1,6 @@
 import { REGISTER_USER, REGISTER_USER_FAIL, REGISTER_USER_SUCCESS } from '../types/types';
 
 export const registerReducer = (state = { user: {} }, action) => {
-    console.log('response');
     switch (action.type) {
         case REGISTER_USER:
             return {

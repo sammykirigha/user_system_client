@@ -7,7 +7,7 @@ import createSagaMiddleware from 'redux-saga';
 import rootSaga from '../sagas/index';
 import { registerReducer } from './reducers/registerReducer';
 import { loginReducer } from './reducers/loginReducer';
-import { createProjectReducer, fetchProjectsReducer, updateProjectReducer } from './reducers/projectReducer';
+import { createProjectReducer, deleteProjectReducer, fetchProjectsReducer, getSingleProjectReducer, updateProjectReducer } from './reducers/projectReducer';
 
 
 export default function configureStore() {
@@ -19,11 +19,12 @@ export default function configureStore() {
             log: loginReducer,
             create: createProjectReducer,
             projects: fetchProjectsReducer,
-            update: updateProjectReducer
+            update: updateProjectReducer,
+            delete: deleteProjectReducer,
+            oneProj: getSingleProjectReducer
        }),
-        composeWithDevTools(applyMiddleware(sagaMiddleware, thunk, logger))
+        composeWithDevTools(applyMiddleware(sagaMiddleware, thunk))
     );
-    console.log('response store');
     sagaMiddleware.run(rootSaga);
 
     return store;

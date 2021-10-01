@@ -3,11 +3,6 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Landing from './components/home/Landing';
 import LoginForm from './components/login/LoginForm';
-import ProjectForm from './components/projects/ProjectForm';
-import ProjectsModal from './components/projects/ProjectsModal';
-import SearchComponent from './components/projects/SearchComponent';
-import ConfirmDelete from './components/projects/view/ConfirmDelete';
-import SingleProjectCard from './components/projects/view/SingleProjectCard';
 import SignupForm from './components/signup/SignupForm';
 import ProjectLayout from './components/projects/ProjectLayout';
 import CreateProjectContainer from './components/projects/create/CreateProjectContainer.jsx';
@@ -17,7 +12,7 @@ import NoProjectMessage from './components/projects/NoProjectMessage';
 
 function App() {
   return (
-    <div className="ui">
+    <div className="ui" id='appContainer'>
       <Switch>
         <Route path='/' exact component={Landing} />
         <Route path='/auth/login' exact component={LoginForm} />
@@ -26,6 +21,7 @@ function App() {
         <ProjectLayout path='/projects/:id/edit' exact component={EditProjectContainer} page='edit' />
         <ProjectLayout path='/projects/' exact component={ProjectList} page='allProjects' />
         <ProjectLayout path='/landing' exact component={NoProjectMessage} page='landing' />
+        <Route path='*' exact component={() => <h1>NOT FOUND</h1>} />
      </Switch>
     </div>
   );

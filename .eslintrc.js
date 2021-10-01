@@ -19,8 +19,8 @@ module.exports = {
         'react'
     ],
     'rules': {
-        'semi': ['warn', 'always'],
-        'quotes': ['error', 'single', { 'allowTemplateLiterals': true }],
+        // 'semi': ['warn', 'always'],
+        // 'quotes': ['error', 'single', { 'allowTemplateLiterals': true }],
         'react/jsx-uses-vars': 'warn',
         'no-undef': 'off',
         'react/react-in-jsx-scope': 'off',
