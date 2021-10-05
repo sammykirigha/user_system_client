@@ -26,7 +26,7 @@ const ProjectsNavBar = ({ username }) => {
       </li>
       <div className="right menu">
         <li className="item">
-          <Link to="/projects">
+          <Link to="/dashboard">
             <i className="tasks icon" /> Dashboard
           </Link>
         </li>

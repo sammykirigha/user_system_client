@@ -14,20 +14,22 @@ export const getAllProjectsService = async () => {
 };
 
 export const getSingleProjectService = async (id) => {
-  const GET_ONE_PROJECT_ENDPOINT = `http://localhost:5000/api/v2/projects/id/${id}`;
+  const GET_ONE_PROJECT_ENDPOINT = `http://localhost:5000/api/v2/projects/${id}`;
   const { data } = await axios.get(GET_ONE_PROJECT_ENDPOINT);
+  console.log('######', data);
   return data;
 };
 
 export const updateProjectService = async (id, project) => {
-  const UPDATE_PROJECT_ENDPOINT = `http://localhost:5000/api/v2/projects/id/${id}`;
+  const UPDATE_PROJECT_ENDPOINT = `http://localhost:5000/api/v2/projects/${id}`;
   console.log('<<<<<<<<<<<<<>>>>>>>>>> service', { project });
   const { data } = await axios.put(UPDATE_PROJECT_ENDPOINT, project);
+  console.log(data);
   return data;
 };
 
 export const deleteProjectService = async (id) => {
-  const DELETE_PROJECT_ENDPOINT = `http://localhost:5000/api/v2/projects/id/${id}`;
+  const DELETE_PROJECT_ENDPOINT = `http://localhost:5000/api/v2/projects/${id}`;
   const { data } = await axios.patch(DELETE_PROJECT_ENDPOINT, id);
   return data;
 };

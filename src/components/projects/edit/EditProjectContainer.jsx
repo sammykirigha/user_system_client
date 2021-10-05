@@ -66,22 +66,24 @@ const EditProjectContainer = () => {
   const onFormSubmit = (e) => {
     e.preventDefault();
     dispatch(updateProjectLoad(id, project));
-    // history.push('/projects');
+    history.push('/projects');
   };
 
   const minDate = moment();
+
   useEffect(() => {
     dispatch(getSingleProjectLoad(id));
     return () => {
       dispatch(resetSelectedProject());
-      setProject({
+      setProject((prev) => ({
+        ...prev,
         project_name: '',
         start_date: '',
         duration: '',
         description: '',
         team_lead: '',
         initial_activity: ''
-      });
+      }));
     };
   }, []);
 
@@ -96,15 +98,14 @@ const EditProjectContainer = () => {
       <Form onSubmit={onFormSubmit}>
         <Form.Field>
           <label htmlFor="name">
-            {' '}
             Project name
             <input
               type="text"
-              name={p.project_name}
+              name="project_name"
               id="name"
               placeholder="enter project name"
               autoComplete="off"
-              value={project.project_name || p.project_name}
+              value={project.project_name || p?.project_name}
               onChange={onChange}
             />
           </label>
@@ -114,14 +115,14 @@ const EditProjectContainer = () => {
             {' '}
             Start Date
             <ReactDatePicker
-              name="date"
+              name="start_date"
               id="date"
-              value={getDate(p.start_date)}
+              value={getDate(p?.start_date)}
               autoComplete="off"
               dateFormat="dd/MM/yyyy"
-              selected={project.start_date}
+              selected={project.start_date || p?.start_date}
               minDate={minDate}
-              onChange={(date) => setProject({ ...project, start_date: date })}
+              onChange={onChange}
               filterDate={(date) => date.getDay() !== 6 && date.getDay() !== 0}
               isClearable
               showYearDropdown
@@ -138,7 +139,7 @@ const EditProjectContainer = () => {
               id="duration"
               placeholder="type project duration"
               rows="1"
-              value={p.duration}
+              value={project.duration || p?.duration}
               onChange={onChange}
             />
           </label>
@@ -152,7 +153,7 @@ const EditProjectContainer = () => {
               id="description"
               placeholder="type project description"
               rows="4"
-              value={project.description || p.description}
+              value={project.description || p?.description}
               onChange={onChange}
             />
           </label>
@@ -164,7 +165,7 @@ const EditProjectContainer = () => {
             name="team_lead"
             fluid
             search
-            value={handleSelect || p.team_lead}
+            value={project.team_lead || p?.team_lead}
             onChange={selectHandle}
             selection
             options={teamLeadMembersOptions}
@@ -177,13 +178,12 @@ const EditProjectContainer = () => {
             name="initial_activity"
             fluid
             search
-            value={handleSelect || p.initial_activity}
+            value={project.initial_activity || p?.initial_activity}
             onChange={selectHandle}
             selection
             options={initialActivityOptions}
           />
         </Form.Field>
-
         <Button primary type="submit">
           Update
         </Button>
